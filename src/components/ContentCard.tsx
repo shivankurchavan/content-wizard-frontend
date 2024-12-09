@@ -3,7 +3,6 @@ import { useState } from "react";
 import { ContentForm } from "./ContentForm";
 import axios from "axios";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 
 export function ContentCard() {
   const [inputType, setInputType] = useState("blog");
