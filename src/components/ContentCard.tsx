@@ -2,6 +2,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
 import { ContentForm } from "./ContentForm";
 import axios from "axios";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 export function ContentCard() {
   const [inputType, setInputType] = useState("blog");
@@ -56,10 +58,18 @@ export function ContentCard() {
           onContentChange={setContent}
           onGenerate={handleGenerate}
         />
-        <div>
-          <p>output</p>
-          <p>{res}</p>
-        </div>
+        
+          <div className="space-y-2 py-2">
+            <Label htmlFor="output" className="text-base font-medium">
+              Your Output
+            </Label>
+            <div
+              id="output"
+              className="min-h-[20px] h-auto p-2 border rounded bg-gray-100 text-sm"
+              style={{ whiteSpace: "pre-wrap", wordWrap: "break-word" }}>
+              {res || "Your Output will be shown here."}
+            </div>
+          </div>
       </CardContent>
     </Card>
   );
