@@ -7,10 +7,12 @@ import { Label } from "@/components/ui/label";
 export function ContentCard() {
   const [inputType, setInputType] = useState("blog");
   const [outputType, setOutputType] = useState("tweets");
+  const [isLoading, setIsLoading] = useState(false);
   const [content, setContent] = useState("");
   const [res, setRes] = useState("");
 
   const handleGenerate = async () => {
+    setIsLoading(true);
     console.log("Generating content...", { inputType, outputType, content });
 
     // Build the request payload dynamically
@@ -38,9 +40,10 @@ export function ContentCard() {
         }
       );
       setRes(response.data);
-      
+      setIsLoading(false);
     } catch (error) {
       console.error("Error while generating content:", error);
+      setIsLoading(false);
     }
   }
 
@@ -52,6 +55,7 @@ export function ContentCard() {
           inputType={inputType}
           outputType={outputType}
           content={content}
+          isLoading={isLoading}
           onInputTypeChange={setInputType}
           onOutputTypeChange={setOutputType}
           onContentChange={setContent}

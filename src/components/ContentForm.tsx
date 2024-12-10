@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Wand2 } from "lucide-react";
+import { Loader2, Wand2 } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -14,6 +14,7 @@ interface ContentFormProps {
   inputType: string;
   outputType: string;
   content: string;
+  isLoading: boolean;
   onInputTypeChange: (value: string) => void;
   onOutputTypeChange: (value: string) => void;
   onContentChange: (value: string) => void;
@@ -24,6 +25,7 @@ export function ContentForm({
   inputType,
   outputType,
   content,
+  isLoading,
   onInputTypeChange,
   onOutputTypeChange,
   onContentChange,
@@ -76,9 +78,19 @@ export function ContentForm({
         className="w-full bg-purple-600 hover:bg-purple-700 transition-all duration-200 transform hover:scale-[1.02]"
         size="lg"
         onClick={onGenerate}
+        disabled={isLoading || !content.trim()}
       >
-        <Wand2 className="mr-2 h-5 w-5" />
-        Generate Content
+        {isLoading ? (
+          <>
+            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+            Generating...
+          </>
+        ) : (
+          <>
+            <Wand2 className="mr-2 h-5 w-5" />
+            Generate Content
+          </>
+        )}
       </Button>
     </div>
   );
